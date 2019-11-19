@@ -63,7 +63,3 @@ class Postmat:
             return 'Открыто'
         else:
             return 'Закрыто'
-
-
-x = Postmat(103)
-print(x.work_today)
