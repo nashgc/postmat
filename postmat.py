@@ -20,22 +20,41 @@ class Postmat:
 
 
     def get_data(self):
+        """
+        Try to receive data from api and return it as json
+        :return: json data
+        """
         http = urllib3.PoolManager()
         r = http.request('GET', self.postmat_url)
-        data = json.loads(r.data)
-        return data
+        if r.status == 200:
+            data = json.loads(r.data)
+            return data
+        else:
+            return None
 
 
     def data_setter(self):
+        """
+        Set data to object variables
+        :return: True or False but actually nothing
+        """
         postmat_data = self.get_data()
-        self.name = postmat_data['name']
-        self.address = postmat_data['address']
-        self.status = postmat_data['status']
-        self.description = postmat_data['description']
-        self.work_today = self.is_it_work_today(postmat_data['working_hours'])
+        if postmat_data != None:
+            self.name = postmat_data['name']
+            self.address = postmat_data['address']
+            self.status = postmat_data['status']
+            self.description = postmat_data['description']
+            self.work_today = self.is_it_work_today(postmat_data['working_hours'])
+        else:
+            return False
 
 
     def is_it_work_today(self, working_hours):
+        """
+        Yeeeeeeeeah, it'a bonus part ;)
+        :param working_hours: json data
+        :return: str
+        """
         day_today = datetime.datetime.today().weekday()
         time_now = datetime.datetime.now().time()
         time_open = working_hours[day_today]['time_open'][:2]
@@ -44,3 +63,7 @@ class Postmat:
             return 'Открыто'
         else:
             return 'Закрыто'
+
+
+x = Postmat(103)
+print(x.work_today)
