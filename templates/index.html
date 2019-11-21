@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Постаматы TelePort</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <header>
+
+        <nav class="navbar navbar-light bg-light justify-content-center">
+  <a class="navbar-brand" href="#">
+    <img src="static/img/logo.png" width="225" height="48" class="d-inline-block align-top" alt="">
+  </a>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+    </header>
+
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Work Hours</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for k, v in data.items() %}
+            <tr>
+                <th scope="row">{{ k }}</th>
+                <td>{{ v.name }}</td>
+                <td>{{ v.status }}</td>
+                <td>{{ v.working_hours }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
